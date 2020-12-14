@@ -1,0 +1,37 @@
+footer {
+  background: var(--col-accent);
+  width: 100%;
+
+  .list-agreements {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .list-social {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    max-width: 360px;
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+
+    li {
+      width: 35px;
+
+      .socialIco {
+        width: 100%;
+
+        path {
+          fill: #ffffff;
+        }
+      }
+    }
+  }
+
+  address {
+    text-align: center;
+    padding: 15px;
+    color: #ffffff;
+  }
+}

@@ -1,0 +1,35 @@
+.news-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--col-main);
+  margin: 30px 0;
+
+  --title-margin: 20px;
+
+  .date {
+    color: var(--col-active-link);
+    font-weight: bold;
+    text-shadow: var(--shadow-params);
+  }
+
+  h3 {
+    flex: 1 1 auto;
+    position: relative;
+    margin: var(--title-margin);
+    padding: 30px var(--title-margin);
+    vertical-align: middle;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: var(--col-accent);
+      z-index: -1;
+      box-shadow: var(--col-accent);
+    }
+  }
+}

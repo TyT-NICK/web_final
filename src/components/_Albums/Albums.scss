@@ -1,0 +1,45 @@
+.albums {
+  .albums-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 70px;
+  }
+
+  .album-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    figure {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 100%;
+      }
+
+      figcaption {
+        text-align: center;
+        max-width: 200px;
+        margin: 15px;
+        word-wrap: break-word;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .albums .albums-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .albums .albums-container {
+    grid-template-columns: 1fr;
+  }
+}

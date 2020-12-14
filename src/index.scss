@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Piazzolla:wght@800&family=Roboto:wght@400&display=swap');
+
+* {
+  --col-bg: #111111;
+  // --col-bg: #0f0;
+  --col-main: #ffffff;
+  --col-accent: #AB1208;
+  --col-active-link: #ed2416;
+  --font-title: 'Piazzolla';
+  --padding-main: 50px;
+  --shadow-params: 0px 0px 20px var(--col-active-link);
+}

@@ -1,0 +1,15 @@
+button {
+  background: var(--col-accent);
+  border: none;
+  padding: 7px 15px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  height: 35px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f53022;
+}
