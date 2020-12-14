@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 
@@ -8,36 +8,10 @@ import { Preloader } from '../preloader/preloader'
 
 import './News.scss'
 
-// ----
-class News {
-  constructor(id, title, previewUrl, content, date) {
-    this.id = id
-    this.title = title
-    this.previewUrl = previewUrl
-    this.content = content
-    this.date = date
-    this.dateString = `${this.date.getDate()}.${this.date.getMonth() + 1}.${this.date.getFullYear()}`
-  }
-}
-
-const newsContentSample = (
-  <section>
-    <p>News Text From a Nearest Future</p>
-    <p>... and another paragraph</p>
-  </section>
-)
-const newsArray = [
-  new News(0, 'title 1', 'https://via.placeholder.com/170x170', newsContentSample, new Date(Date.now())),
-  new News(2, 'title 2', 'https://via.placeholder.com/170x170', newsContentSample, new Date(Date.now())),
-  new News(3, 'title 3', 'https://via.placeholder.com/170x170', newsContentSample, new Date(Date.now())),
-]
-// ----
-
 export const NewsPage = () => {
   const { id } = useParams()
-  // const [ isReady, setReady ] = useState(false)
   const [ news, setNews ] = useState({})
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request } = useHttp()
 
   useEffect(() => {
     async function getReq() {
@@ -53,7 +27,7 @@ export const NewsPage = () => {
       <div className="content-container">
         <h2><span>{news.title}</span></h2>
 
-        <img src={news.previewUrl} />
+        <img src={news.previewUrl} alt="" />
         {news.content}
 
       </div>
@@ -67,7 +41,7 @@ const NewsItem = (props) => {
   return (
     <Link to={path}>
       <section className="news-item">
-        <img src={news.previewUrl} />
+        <img src={news.previewUrl} alt="" />
         <h2 className="sub-title"><span>{news.title}</span></h2>
         <span className="date">
           {news.date}
