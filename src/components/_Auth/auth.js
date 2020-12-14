@@ -15,7 +15,7 @@ const AuthPage = () => {
     try {
       data = await request('/api/auth/login', 'POST', input)
       console.log(data)
-      auth.login(data.token, data.userId)
+      auth.login(data.token, data.adminId)
     } catch (e) {
       console.error(data)
     }
