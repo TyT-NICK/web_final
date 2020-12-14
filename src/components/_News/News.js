@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 
+import { useHttp } from '../../hooks/http.hook'
+
 import { Preloader } from '../preloader/preloader'
 
 import './News.scss'
@@ -33,21 +35,21 @@ const newsArray = [
 
 export const NewsPage = () => {
   const { id } = useParams()
-  const [ isReady, setReady ] = useState(false)
+  // const [ isReady, setReady ] = useState(false)
   const [ news, setNews ] = useState({})
+  const { loading, request, error, clearError } = useHttp()
 
   useEffect(() => {
-    fetch(`http://a0490648.xsph.ru/api/news/${id}`)
-      .then((res) => res.json())
-      .then((resNews) => {
-        setReady(true)
-        setNews(resNews)
-      })
-      .catch((e) => console.error(e))
-  }, [])
+    async function getReq() {
+      const fetched = await request(`http://a0490648.xsph.ru/api/news/${id}`)
+      setNews(fetched)
+    }
+
+    getReq()
+  }, [ id, request ])
 
   return (
-    !isReady ? <Preloader /> :
+    loading ? <Preloader /> :
       <div className="content-container">
         <h2><span>{news.title}</span></h2>
 

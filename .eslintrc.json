@@ -43,6 +43,10 @@
             "warn",
             "always"
         ],
-        "require-jsdoc": "off"
+        "require-jsdoc": "off",
+        "max-len": [
+            "warn",
+            100
+        ]
     }
 }
