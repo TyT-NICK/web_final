@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, NavLink, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import AuthContext from '../../context/AuthContext'
 import './Albums.scss'
 import { useHttp } from '../../hooks/http.hook'
@@ -8,7 +8,7 @@ import { Preloader } from '../preloader/preloader'
 export const AlbumPage = () => {
   const { request, loading } = useHttp()
   const { id } = useParams()
-  const [ album, setAlbum ] = useState('')
+  const [ album, setAlbum ] = useState({ })
 
   useEffect(() => {
     const fetching = async () => {
@@ -17,7 +17,7 @@ export const AlbumPage = () => {
       setAlbum(fetched)
     }
     fetching()
-  }, [])
+  }, [ id, request ])
 
   return (
     loading ? <Preloader /> :
@@ -28,6 +28,34 @@ export const AlbumPage = () => {
             <div className="img"><img src={album.imgUrl} alt="" /></div>
             <figcaption><p>{album.caption}</p></figcaption>
           </figure>
+        </section>
+
+        <section className="album-info">
+          <div className="album-tracks">
+            <h1 className="sub-title"><span>Список песен</span></h1>
+            <ul>
+              {
+                !album.Tracks ? null :
+                  album.Tracks.map((x, i) => <li key={i}>{x}</li>)
+              }
+            </ul>
+          </div>
+          <div className="album-right-bar">
+            <h2 className="sub-title"><span>Слушать</span></h2>
+            <ul>
+              {
+                !album.AlbumServices ? null :
+                  album.AlbumServices.map((x, i) => <li key={i}>{x}</li>)
+              }
+            </ul>
+            <h2 className="sub-title"><span>Авторы</span></h2>
+            <ul>
+              {
+                !album.AlbumAuthors ? null :
+                  album.AlbumAuthors.map((x, i) => <li key={i}>{x}</li>)
+              }
+            </ul>
+          </div>
         </section>
       </div>
   )
@@ -66,7 +94,7 @@ const AllAlbumsPage = (props) => {
       setAlbums(fetched)
     }
     fetching()
-  }, [])
+  }, [ request ])
 
   return (
     loading ? <Preloader /> :
@@ -81,6 +109,7 @@ const AllAlbumsPage = (props) => {
           <div className="albums-container">
             {
               albums.map((x, i) => <AlbumItem key={i} album={x} />)
+
             }
             <AlbumItem album={album} />
             <AlbumItem album={album} />
