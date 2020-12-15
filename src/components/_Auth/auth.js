@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 
 import { useHttp } from '../../hooks/http.hook'
 import AuthContext from '../../context/AuthContext'
+import { Preloader } from '../preloader/preloader'
 
 const AuthPage = () => {
   const [ input, setInput ] = useState({ email: '', pwd: '' })
@@ -26,21 +27,22 @@ const AuthPage = () => {
   }
 
   return (
-    <div className="content-container">
-      <form onSubmit={submitHandler} >
-        <input name="email"
-          type="email"
-          value={input.email}
-          onChange={inputChangeHandler}
-          placeholder="email"/>
-        <input name="pwd"
-          type="password"
-          value={input.pwd}
-          onChange={inputChangeHandler}
-          placeholder="пароль"/>
-        <input type="submit"/>
-      </form>
-    </div>
+    loading ? <Preloader /> :
+      <div className="content-container">
+        <form onSubmit={submitHandler} >
+          <input name="email"
+            type="email"
+            value={input.email}
+            onChange={inputChangeHandler}
+            placeholder="email"/>
+          <input name="pwd"
+            type="password"
+            value={input.pwd}
+            onChange={inputChangeHandler}
+            placeholder="пароль"/>
+          <input type="submit"/>
+        </form>
+      </div>
   )
 }
 

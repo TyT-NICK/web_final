@@ -32,6 +32,22 @@
   }
 }
 
+.album-info {
+  display: flex;
+
+  .album-tracks {
+    flex: auto 1 1;
+  }
+
+  .album-right-bar {
+    flex: 30% 0 0;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @media screen and (max-width: 840px) {
   .albums .albums-container {
     grid-template-columns: 1fr 1fr;

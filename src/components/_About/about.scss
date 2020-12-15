@@ -7,18 +7,19 @@
     align-items: flex-start;
 
     .img {
-      flex: 30% 1 1;
+      flex: 30% 0 0;
       max-width: 480px;
       max-height: 320px;
       margin-left: 50px;
       overflow: hidden;
 
       img {
-        width: 100px;
+        width: 100%;
       }
     }
 
     figcaption {
+      flex: 1 1 auto;
       color: var(--col-main);
     }
   }

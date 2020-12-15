@@ -1,6 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-// import logo from './logo.svg';
+import { Link } from 'react-router-dom'
 import './Events.scss'
 
 export class Event {
@@ -16,12 +15,16 @@ export class Event {
 
 const EventComponent = (props) => {
   const event = props.event
+  const path = `/events/${event._id}`
+
 
   return (
-    <figure className="event">
-      <img className="event-bg-img" src={event.bgImg} alt="123"></img>
-      <figcaption>{event.title}</figcaption>
-    </figure>
+    <Link to={path}>
+      <figure className="event">
+        <img className="event-bg-img" src={event.bgImg} alt="123"></img>
+        <figcaption>{event.title}</figcaption>
+      </figure>
+    </Link>
   )
 }
 

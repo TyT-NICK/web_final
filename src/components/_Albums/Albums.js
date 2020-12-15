@@ -1,54 +1,123 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import AuthContext from '../../context/AuthContext'
 import './Albums.scss'
+import { useHttp } from '../../hooks/http.hook'
+import { Preloader } from '../preloader/preloader'
 
-import Button from '../button/Button'
+export const AlbumPage = () => {
+  const { request, loading } = useHttp()
+  const { id } = useParams()
+  const [ album, setAlbum ] = useState({ })
 
-export const AlbumPage = (props) => {
-  const album = props.album
+  useEffect(() => {
+    const fetching = async () => {
+      console.log(id)
+      const fetched = await request(`/api/album/${id}`, 'GET', null)
+      setAlbum(fetched)
+    }
+    fetching()
+  }, [ id, request ])
 
   return (
-    <div className="content-container">
+    loading ? <Preloader /> :
+      <div className="content-container">
+        <section className="about-group">
+          <h1 className="main-title"><span>{album.title}</span></h1>
+          <figure className="">
+            <div className="img"><img src={album.imgUrl} alt="" /></div>
+            <figcaption><p>{album.caption}</p></figcaption>
+          </figure>
+        </section>
 
-    </div>
+        <section className="album-info">
+          <div className="album-tracks">
+            <h1 className="sub-title"><span>Список песен</span></h1>
+            <ul>
+              {
+                !album.Tracks ? null :
+                  album.Tracks.map((x, i) => <li key={i}>{x}</li>)
+              }
+            </ul>
+          </div>
+          <div className="album-right-bar">
+            <h2 className="sub-title"><span>Слушать</span></h2>
+            <ul>
+              {
+                !album.AlbumServices ? null :
+                  album.AlbumServices.map((x, i) => <li key={i}>{x}</li>)
+              }
+            </ul>
+            <h2 className="sub-title"><span>Авторы</span></h2>
+            <ul>
+              {
+                !album.AlbumAuthors ? null :
+                  album.AlbumAuthors.map((x, i) => <li key={i}>{x}</li>)
+              }
+            </ul>
+          </div>
+        </section>
+      </div>
   )
 }
 
 const AlbumItem = (props) => {
   const album = props.album
-  const path = `/albums/${album.id}`
+  const path = `/albums/${album._id}`
 
   return (
-    <div className="album-item">
-      <figure>
-        <img src="https://via.placeholder.com/170x170" alt="123" />
-        <figcaption><NavLink to={path}>{album.name}</NavLink></figcaption>
-      </figure>
-      <Button caption='слушать' action={() => alert(123)} />
-    </div>
+    <Link to={path}>
+      <div className="album-item">
+        <figure>
+          <img src="https://via.placeholder.com/170x170" alt="123" />
+          <figcaption>{album.title}</figcaption>
+        </figure>
+      </div>
+    </Link>
   )
 }
 
 const album = {
   id: 1,
-  name: '12asdasdasd asdasda asd a3',
+  title: '12asdasdasd asdasda asd a3',
 }
 
 const AllAlbumsPage = (props) => {
+  const { request, loading } = useHttp()
+  const [ albums, setAlbums ] = useState([])
+  const auth = useContext(AuthContext)
+  const isAuthenticated = auth.isAuthenticated
+
+  useEffect(() => {
+    const fetching = async () => {
+      const fetched = await request('/api/album/', 'GET', null)
+      setAlbums(fetched)
+    }
+    fetching()
+  }, [ request ])
+
   return (
-    <div className="content-container">
-      <section className="albums">
-        <h2 className="main-title"><span>Наши релизы</span></h2>
-        {/* <h1>Альбомы</h1> */}
-        <div className="albums-container">
-          <AlbumItem album={album} />
-          <AlbumItem album={album} />
-          <AlbumItem album={album} />
-          <AlbumItem album={album} />
-        </div>
-      </section>
-    </div>
+    loading ? <Preloader /> :
+      <div className="content-container">
+        <section className="albums">
+          {
+            isAuthenticated ?
+              <Link to="/albums/add" /> :
+              null
+          }
+          <h2 className="main-title"><span>Наши релизы</span></h2>
+          <div className="albums-container">
+            {
+              albums.map((x, i) => <AlbumItem key={i} album={x} />)
+
+            }
+            <AlbumItem album={album} />
+            <AlbumItem album={album} />
+            <AlbumItem album={album} />
+            <AlbumItem album={album} />
+          </div>
+        </section>
+      </div>
   )
 }
 
