@@ -23,56 +23,55 @@ import EventsPage from './components/_Events/Events'
 // ]
 
 export const useRoutes = (isAuthenticated) => {
-  if (isAuthenticated) {
-    return (
-      <Switch>
-        <Route path="/albums" exact>
-          <AllAlbumsPage />
-        </Route>
-        <Route path="/albums/:id" exact>
-          <AlbumPage />
-        </Route>
-        <Route path="/albums/add" exact>
-          <p>adding</p>
-        </Route>
-        <Route path="/events" exact>
-          <EventsPage />
-        </Route>
-        <Route path="/events/:id" exact>
-          <Events />
-        </Route>
-        <Route path="/news" exact>
-          <AllNews />
-        </Route>
-        <Route path="/news/:id" exact>
-          <NewsPage />
-        </Route>
-        <Route path="/shop" exact>
+  console.log('in routes')
+  return (
+    <Switch>
+      <Route path="/albums" exact>
+        <AllAlbumsPage />
+      </Route>
+      <Route path="/albums/:id" exact>
+        <AlbumPage />
+      </Route>
+      <Route path="/albums/add" exact>
+        <p>adding</p>
+      </Route>
+      <Route path="/events" exact>
+        <EventsPage />
+      </Route>
+      <Route path="/events/:id" exact>
+        <Events />
+      </Route>
+      <Route path="/news" exact>
+        <AllNews />
+      </Route>
+      <Route path="/news/:id" exact>
+        <NewsPage />
+      </Route>
+      <Route path="/shop" exact>
+        {null}
+      </Route>
+      <Route path="/contacts" exact>
+        {null}
+      </Route>
+      <Route path="/sandbox" exact>
+        <Sandbox />
+      </Route>
+      <Route path="/about" exact>
+        <AboutPage />
+      </Route>
+      {isAuthenticated ?
+        <Route path="/addAdmin" exact>
           {null}
-        </Route>
-        <Route path="/contacts" exact>
-          {null}
-        </Route>
-        <Route path="/sandbox" exact>
-          <Sandbox />
-        </Route>
-        <Route path="/about" exact>
-          <AboutPage />
-        </Route>
-        {isAuthenticated ?
-          <Route path="/addAdmin" exact>
-            {null}
-          </Route> :
-          <Redirect to="/events" />
-        }
-        {!isAuthenticated ?
-          <Route path="/login" exact>
-            <AuthPage />
-          </Route> :
-          <Redirect to="/events" />
-        }
+        </Route> :
         <Redirect to="/events" />
-      </Switch>
-    )
-  }
+      }
+      {!isAuthenticated ?
+        <Route path="/login" exact>
+          <AuthPage />
+        </Route> :
+        <Redirect to="/events" />
+      }
+      <Redirect to="/events" />
+    </Switch>
+  )
 }
