@@ -8,6 +8,7 @@ import { AllNews, NewsPage } from './components/_News/News'
 import AuthPage from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
 import EventsPage, { EventPage } from './components/_Events/Events'
+import { Shop } from './components/_Shop/Shop'
 
 export const useRoutes = (isAuthenticated) => {
   return (
@@ -34,7 +35,7 @@ export const useRoutes = (isAuthenticated) => {
         <NewsPage />
       </Route>
       <Route path="/shop" exact>
-        {null}
+        <Shop />
       </Route>
       <Route path="/contacts" exact>
         {null}
