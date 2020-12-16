@@ -5,6 +5,7 @@ import { Preloader } from '../preloader/preloader'
 import Button from '../button/Button'
 import './Events.scss'
 
+
 export const EventPage = () => {
   const { request, loading } = useHttp()
   const { id } = useParams()
@@ -44,18 +45,7 @@ export const EventPage = () => {
       </div>
   )
 }
-
-export class Event {
-  constructor(title, descr, place, datetime, price, bgImg) {
-    this.title = title
-    this.descr = descr
-    this.place = place
-    this.datetime = datetime
-    this.price = price
-    this.bgImg = bgImg
-  }
-}
-
+    
 const EventComponent = (props) => {
   const event = props.event
   const path = `/events/${event._id}`
