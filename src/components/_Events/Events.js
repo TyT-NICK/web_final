@@ -16,7 +16,6 @@ export const EventPage = () => {
       setEvent(fetched)
     }
     fetching()
-    console.log('Теперь я тут, удоли меня')
   }, [ id, request ])
 
   return (
@@ -37,7 +36,7 @@ export const EventPage = () => {
 
         <section className="album-info">
           <div className="album-tracks">
-            <a href={event.link} className="button">Посетить</a>
+            <a href={event.link} target="_blank" rel="noreferrer" className="button">Посетить</a>
           </div>
         </section>
       </div>
