@@ -10,7 +10,7 @@ export const EventPage = () => {
   const { request, loading } = useHttp()
   const { id } = useParams()
   const [ event, setEvent ] = useState({ })
-
+  console.log('УДАЛИТЕ МЕНЯ!')
   useEffect(() => {
     const fetching = async () => {
       const fetched = await request(`/api/event/${id}`, 'GET', null)
@@ -45,7 +45,7 @@ export const EventPage = () => {
       </div>
   )
 }
-    
+
 const EventComponent = (props) => {
   const event = props.event
   const path = `/events/${event._id}`
