@@ -4,7 +4,7 @@ import './Header.scss'
 
 const Header = () => {
   const imgUrl =
-  'https://raw.githubusercontent.com/TyT-NICK/web_final/main/public/resources/logo.png?token=AMZCV6WPCPKRN3BI64W2TSS73HTMY'
+  'https://vk.com/doc172967407_580004196?hash=3a9a24a8c2e5117187&dl=26ce2e3a8c09656e77'
   return (
     <header>
       <div className="content-container">
