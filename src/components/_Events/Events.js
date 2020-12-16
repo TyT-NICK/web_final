@@ -1,8 +1,51 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useHttp } from '../../hooks/http.hook'
+import { Preloader } from '../preloader/preloader'
+import Button from '../button/Button'
 import './Events.scss'
 
+
+export const EventPage = () => {
+  const { request, loading } = useHttp()
+  const { id } = useParams()
+  const [ event, setEvent ] = useState({ })
+
+  useEffect(() => {
+    const fetching = async () => {
+      const fetched = await request(`/api/event/${id}`, 'GET', null)
+      setEvent(fetched)
+    }
+    fetching()
+  }, [ id, request ])
+
+  return (
+    loading ? <Preloader /> :
+      <div className="content-container">
+        <h1 className="main-title"><span>{event.name}</span></h1>
+        <section className="album-info">
+          <div className="album-tracks">
+            <figcaption><p>{event.content}</p></figcaption>
+          </div>
+          <div className="album-right-bar">
+            <h2 className="sub-title"><span>Место</span></h2>
+            <p> {event.place} </p>
+            <h2 className="sub-title"><span>Время и дата</span></h2>
+            <p> {event.date} </p>
+          </div>
+        </section>
+
+        <section className="album-info">
+          <div className="album-tracks">
+            <Button caption="Посетить" action={() => {
+              window.open(event.link, '_blank')
+            }} />
+          </div>
+        </section>
+      </div>
+  )
+}
+    
 const EventComponent = (props) => {
   const event = props.event
   const path = `/events/${event._id}`
@@ -51,7 +94,7 @@ const EventsPage = () => {
 
       const monthes = [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь' ]
       const preEvents = {}
-      fetched.map((x) => {
+      fetched.forEach((x) => {
         const date = new Date(x.date)
         const m = date.getMonth()
         const y = date.getFullYear()

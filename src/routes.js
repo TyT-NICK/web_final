@@ -2,14 +2,12 @@
 import React from 'react'
 
 import AllAlbumsPage, { AlbumPage } from './components/_Albums/Albums'
-import Events from './components/_Events/Events'
 import Sandbox from './components/sandbox/sandbox'
 import AboutPage from './components/_About/about'
 import { AllNews, NewsPage } from './components/_News/News'
 import AuthPage from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
-import EventsPage from './components/_Events/Events'
-
+import EventsPage, { EventPage } from './components/_Events/Events'
 
 export const useRoutes = (isAuthenticated) => {
   return (
@@ -27,7 +25,7 @@ export const useRoutes = (isAuthenticated) => {
         <EventsPage />
       </Route>
       <Route path="/events/:id" exact>
-        <Events />
+        <EventPage />
       </Route>
       <Route path="/news" exact>
         <AllNews />
