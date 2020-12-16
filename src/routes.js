@@ -12,7 +12,6 @@ import EventsPage from './components/_Events/Events'
 
 
 export const useRoutes = (isAuthenticated) => {
-  console.log('in routes')
   return (
     <Switch>
       <Route path="/albums" exact>
