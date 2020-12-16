@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useHttp } from '../../hooks/http.hook'
 import { Preloader } from '../preloader/preloader'
-import Button from '../button/Button'
 import './Events.scss'
 
 
@@ -37,9 +36,7 @@ export const EventPage = () => {
 
         <section className="album-info">
           <div className="album-tracks">
-            <Button caption="Посетить" action={() => {
-              window.open(event.link, '_blank')
-            }} />
+            <a href={event.link} className="button">Посетить</a>
           </div>
         </section>
       </div>
