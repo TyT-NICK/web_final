@@ -44,6 +44,15 @@
             "always"
         ],
         "require-jsdoc": "off",
+<<<<<<< HEAD
         "new-cap": "off"
+=======
+        "max-len": [
+            "error",
+            {
+                "code": 150
+            }
+        ]
+>>>>>>> ad8ef05dcb61abba5bc31c5a3491e297103b45f3
     }
 }
