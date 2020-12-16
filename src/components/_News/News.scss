@@ -42,3 +42,28 @@
     }
   }
 }
+
+.content {
+  color: var(--main-color);
+}
+
+.date {
+  color: var(--col-active-link);
+  font-weight: bold;
+  text-shadow: var(--shadow-params);
+}
+
+.news-img {
+  text-align: center;
+  // display: flex;// flex-direction: column;
+  // justify-content: center;
+  max-height: 300px;
+  padding-bottom: 50%;
+  overflow: hidden;
+
+  img {
+    max-width: 100%;
+    // margin: 0 auto;
+    // width: 100%;
+  }
+}

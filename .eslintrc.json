@@ -43,6 +43,7 @@
             "warn",
             "always"
         ],
-        "require-jsdoc": "off"
+        "require-jsdoc": "off",
+        "new-cap": "off"
     }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
+import Moment from 'moment'
 
 import { useHttp } from '../../hooks/http.hook'
 
@@ -25,11 +26,21 @@ export const NewsPage = () => {
   return (
     loading ? <Preloader /> :
       <div className="content-container">
-        <h2><span>{news.title}</span></h2>
-
-        <img src={news.previewUrl} alt="" />
-        {news.content}
-
+        <section>
+          <h2 className="main-title"><span>{news.title}</span></h2>
+          <div className="content">
+            <div className="img news-img">
+              {/* <img src={news.previewUrl} alt="" /> */}
+              <img src="https://via.placeholder.com/170x600" alt="" />
+            </div>
+            <p>
+              {news.content}
+            </p>
+          </div>
+          <span className="date">
+            {Moment(news.date).format('DD.MM.YYYY')}
+          </span>
+        </section>
       </div>
   )
 }
@@ -49,7 +60,7 @@ const NewsItem = (props) => {
           </h2>
         </div>
         <span className="date">
-          {news.date}
+          { Moment(news.date).format('DD.MM.YYYY') }
         </span>
       </section>
     </Link>
