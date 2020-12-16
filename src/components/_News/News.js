@@ -41,8 +41,13 @@ const NewsItem = (props) => {
   return (
     <Link to={path}>
       <section className="news-item">
-        <img src={news.previewUrl} alt="" />
-        <h2 className="sub-title"><span>{news.title}</span></h2>
+        <div className="img"><img src={'https://via.placeholder.com/170x170'} alt="" /></div>
+        {/* <div className="img"><img src={news.previewUrl} alt="" /></div> */}
+        <div className="flex-filler news-title">
+          <h2 className="sub-title news-item-title">
+            <span>{news.title}</span>
+          </h2>
+        </div>
         <span className="date">
           {news.date}
         </span>

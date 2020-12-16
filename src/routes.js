@@ -10,17 +10,6 @@ import AuthPage from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
 import EventsPage from './components/_Events/Events'
 
-// const Routes = [
-//   new Route('/events', 'Афиша', <Events />),
-//   new Route('/news/:id', 'Новость', <NewsPage />),
-//   new Route('/news', 'Новости', <AllNews />),
-//   new Route('/albums', 'Альбомы', <AlbumPage />),
-//   new Route('/shop', 'Магазин', null),
-//   new Route('/contacts', 'Контакты', null),
-//   new Route('/about', 'О нас', <AboutPage />),
-//   new Route('/sandbox', 'Песочница', <Sandbox />),
-//   new Route('/login', 'Войти', <AuthPage />, true),
-// ]
 
 export const useRoutes = (isAuthenticated) => {
   console.log('in routes')

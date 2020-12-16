@@ -7,6 +7,15 @@
 
   --title-margin: 20px;
 
+  .news-title {
+    margin: 30px;
+  }
+
+  .sub-title.news-item-title {
+    font-size: 1.1em;
+    // flex: auto 1 1;
+  }
+
   .date {
     color: var(--col-active-link);
     font-weight: bold;

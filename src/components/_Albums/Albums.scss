@@ -35,6 +35,15 @@
 .album-info {
   display: flex;
 
+  * {
+    color: var(--col-main);
+  }
+
+  ul {
+    list-style: none;
+    padding: 25px 0;
+  }
+
   .album-tracks {
     flex: auto 1 1;
   }
