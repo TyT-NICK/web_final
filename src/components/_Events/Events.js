@@ -3,17 +3,6 @@ import { Link } from 'react-router-dom'
 import { useHttp } from '../../hooks/http.hook'
 import './Events.scss'
 
-export class Event {
-  constructor(title, descr, place, datetime, price, bgImg) {
-    this.title = title
-    this.descr = descr
-    this.place = place
-    this.datetime = datetime
-    this.price = price
-    this.bgImg = bgImg
-  }
-}
-
 const EventComponent = (props) => {
   const event = props.event
   const path = `/events/${event._id}`
