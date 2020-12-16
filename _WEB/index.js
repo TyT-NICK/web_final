@@ -7,7 +7,7 @@ const PORT = config.get('port') || 5000
 const app = express()
 
 app.use(require('body-parser').json())
-app.use(require('body-parser').urlencoded({ extended: true }))// !!!!!!!!!!!!!!!!!!
+app.use(require('body-parser').urlencoded({ extended: true }))
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'X-Requested-With')

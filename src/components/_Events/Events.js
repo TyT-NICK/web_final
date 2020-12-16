@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useHttp } from '../../hooks/http.hook'
 import './Events.scss'
 
 export class Event {
@@ -17,29 +18,14 @@ const EventComponent = (props) => {
   const event = props.event
   const path = `/events/${event._id}`
 
-
   return (
     <Link to={path}>
       <figure className="event">
-        <img className="event-bg-img" src={event.bgImg} alt="123"></img>
-        <figcaption>{event.title}</figcaption>
+        <img className="event-bg-img" src={event.previewUrl} alt="123"></img>
+        <figcaption>{event.name}</figcaption>
       </figure>
     </Link>
   )
-}
-
-const events = {
-  'Март': [
-    new Event('123', 'asd', 'asd', 'asd', 'zxc', 'https://via.placeholder.com/350x270'),
-    new Event('312', 'asd', 'asd', 'asd', 'zxc', 'https://via.placeholder.com/320x1500'),
-    new Event('145456 nnlkmlkm ojjhknln knlkn', 'asd', 'asd', 'asd', 'zxc', 'https://via.placeholder.com/320x170'),
-    new Event('145456', 'asd', 'asd', 'asd', 'zxc', 'https://via.placeholder.com/320x170'),
-  ],
-  'Февраль': [
-    new Event('123', 'asd', 'asd', 'asd', 'zxc', 'https://via.placeholder.com/320x170'),
-    new Event('123', 'asd', 'asd', 'asd', 'zxc', 'https://via.placeholder.com/1600x170'),
-    new Event('123', 'asd', 'asd', 'asd', 'zxc', 'https://via.placeholder.com/320x170'),
-  ],
 }
 
 
@@ -58,6 +44,41 @@ const EventMonth = (props) => {
 }
 
 const EventsPage = () => {
+  const { request } = useHttp()
+
+  const [ events, setEvents ] = useState([])
+
+  useEffect(() => {
+    const fetching = async () => {
+      const fetched = await request('/api/event/', 'GET', null)
+      fetched.sort((a, b) => {
+        if (a.date > b.date) {
+          return 1
+        } else if (a.date < b.date) {
+          return -1
+        }
+        return 0
+      })
+
+      const monthes = [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь' ]
+      const preEvents = {}
+      fetched.map((x) => {
+        const date = new Date(x.date)
+        const m = date.getMonth()
+        const y = date.getFullYear()
+        const my = `${monthes[m]} ${y}`
+
+        if (!preEvents[my]) {
+          preEvents[my] = []
+        }
+
+        preEvents[my].push(x)
+      })
+      setEvents(preEvents)
+    }
+    fetching()
+  }, [ request ])
+
   return (
     <div className="content-container">
       {
