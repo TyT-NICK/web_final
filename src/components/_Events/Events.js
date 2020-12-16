@@ -9,13 +9,14 @@ export const EventPage = () => {
   const { request, loading } = useHttp()
   const { id } = useParams()
   const [ event, setEvent ] = useState({ })
-  console.log('УДАЛИТЕ МЕНЯ!')
+
   useEffect(() => {
     const fetching = async () => {
       const fetched = await request(`/api/event/${id}`, 'GET', null)
       setEvent(fetched)
     }
     fetching()
+    console.log('Теперь я тут, удоли меня')
   }, [ id, request ])
 
   return (
