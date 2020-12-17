@@ -41,12 +41,16 @@ export const useRoutes = (isAuthenticated) => {
       <Route path="/contacts" exact>
         <ContactPage />
       </Route>
-      <Route path="/sandbox" exact>
-        <Sandbox />
-      </Route>
+
       <Route path="/about" exact>
         <AboutPage />
       </Route>
+      {
+        isAuthenticated &&
+        <Route path="/sandbox" exact>
+          <Sandbox />
+        </Route>
+      }
       {
         isAuthenticated &&
           <Route path="/addAdmin" exact>
