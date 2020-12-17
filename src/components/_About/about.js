@@ -1,28 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './about.scss'
 
-const AboutGroup = () => {
-  const descr =
-    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
-    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
-    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
-    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
-    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
-    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
-    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s'
+export const EditAboutGroup = () => {
+  const [ input, setInput ] = useEffect({})
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault()
+    const path = '/api/groupInfo'
+  }
+
+  const inputChangeHandler = (e) => {
+    setInput((prev) => {
+      return { ...prev, [e.target.name]: e.target.value }
+    })
+  }
 
   return (
-    <section className="about-group">
-      <h1 className="main-title"><span>О группе</span></h1>
+    <div className="content-container">
+      <form action="" onSubmit={formSubmitHandler}>
+        <label>
+          Описание
+          <input type="textarea"
+            name="descriprion"
+            value={input.description}
+            onChange={inputChangeHandler}/>
+        </label>
 
-      <figure className="">
-        <div className="img"><img src="https://via.placeholder.com/320x480" alt="" /></div>
-        <figcaption><p>{descr}</p></figcaption>
-      </figure>
-    </section>
+        <label>
+          Ссылка на изображение
+          <input type="text"
+            name="imgUrl"
+            value={input.imgUrl}
+            onChange={inputChangeHandler} />
+        </label>
+      </form>
+    </div>
   )
 }
+
 
 const members = [
   {
