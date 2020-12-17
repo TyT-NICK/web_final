@@ -97,10 +97,6 @@ body {
 
   }
 
-  p {
-    padding: 15px 0 0;
-  }
-
   .flex-filler {
     flex: auto 1 1;
   }
@@ -119,5 +115,27 @@ body {
     &:hover {
       background: #f53022;
     }
+  }
+
+  .edit-form {
+    label {
+      color: var(--col-main);
+    }
+
+    .form-item {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+    }
+
+    textarea {
+      resize: vertical;
+      max-height: 200px;
+    }
+  }
+
+  .admin-panel {
+    display: flex;
+    padding: 10px 0;
   }
 }
