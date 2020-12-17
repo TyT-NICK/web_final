@@ -4,7 +4,9 @@ import './Header.scss'
 
 const Header = () => {
   const imgUrl =
-  'https://vk.com/doc172967407_580004196?hash=3a9a24a8c2e5117187&dl=26ce2e3a8c09656e77'
+    'https://psv4.userapi.com/c856332/u172967407/docs/d8/92480309c42a/' +
+    'logo.png?extra=D9mZOKJZwltq9y3r4QfXyRn5QmM1Y_ZnNCNWykEKfmGQ5qdGIM7dY' +
+    '3QzWyovEBo7VUaskXpqiFjHgKlcXZa79GEAByWDtqC0icfwOc7Zx0biDWyfKu0YeqG8VQsXBk5jJ6B2PVzMvbFG4tz_l5mECSYiwQ'
   return (
     <header>
       <div className="content-container">
