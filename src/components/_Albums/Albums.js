@@ -69,7 +69,9 @@ const AlbumItem = (props) => {
     <Link to={path}>
       <div className="album-item">
         <figure>
-          <img src="https://via.placeholder.com/170x170" alt="123" />
+          <div className="img">
+            <img src="https://via.placeholder.com/170x170" alt="123" />
+          </div>
           <figcaption>{album.title}</figcaption>
         </figure>
       </div>
