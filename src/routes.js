@@ -49,15 +49,15 @@ export const useRoutes = (isAuthenticated) => {
         <Route path="/addAdmin" exact>
           {null}
         </Route> :
-        <Redirect to="/events" />
+        <Redirect to="/news" />
       }
       {!isAuthenticated ?
         <Route path="/login" exact>
           <AuthPage />
         </Route> :
-        <Redirect to="/events" />
+        <Redirect to="/news" />
       }
-      <Redirect to="/events" />
+      <Redirect to="/news" />
     </Switch>
   )
 }

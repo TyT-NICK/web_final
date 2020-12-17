@@ -12,8 +12,8 @@ const Header = () => {
       <div className="content-container">
         <img className="header-logo" src={imgUrl} alt="" />
         <nav className="header-nav">
-          <NavLink to="/events">Афиша</NavLink>
           <NavLink to="/news">Новости</NavLink>
+          <NavLink to="/events">Афиша</NavLink>
           <NavLink to="/albums">Альбомы</NavLink>
           <NavLink to="/shop">Магазин</NavLink>
           <NavLink to="/contacts">Контакты</NavLink>
