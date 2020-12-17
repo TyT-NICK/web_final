@@ -19,12 +19,11 @@ export const NewsPage = () => {
   useEffect(()=> {
     const fetching = async () => {
       const fetched = await request(path, 'GET')
-      console.log(fetched)
       setNews(fetched)
     }
 
     fetching()
-  }, [])
+  }, [ path, request ])
 
   return (
     loading ? <Preloader /> :
@@ -83,7 +82,7 @@ export const AllNews = () => {
     }
 
     fetching()
-  }, [])
+  }, [ path, request ])
 
   return (
     loading ? <Preloader /> :

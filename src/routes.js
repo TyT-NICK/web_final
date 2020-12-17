@@ -12,7 +12,6 @@ import { Shop } from './components/_Shop/Shop'
 import { ContactPage } from './components/_Contact/contact'
 
 export const useRoutes = (isAuthenticated) => {
-  console.log(isAuthenticated)
   return (
     <Switch>
       <Route path="/albums" exact>

@@ -36,7 +36,7 @@ export const EventPage = () => {
 
         <section className="album-info">
           <div className="album-tracks">
-            <a href={event.link} target="_blank" rel="noreferrer" className="button">Посетить</a>
+            <a href={event.link} target="_blank" rel="noopener noreferrer" className="button">Посетить</a>
           </div>
         </section>
       </div>

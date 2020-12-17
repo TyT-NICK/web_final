@@ -20,7 +20,7 @@ export const EditAboutGroup = () => {
     }
 
     fetching()
-  }, [])
+  }, [ path, request ])
 
   const formSubmitHandler = (e) => {
     e.preventDefault()
@@ -84,7 +84,7 @@ const AboutGroup = () => {
     }
 
     fetching()
-  }, [])
+  }, [ path, request ])
 
   return (
     loading ? <Preloader /> :

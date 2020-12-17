@@ -6,7 +6,7 @@ const MerchItem = (props) => {
   const item = props.item
 
   return (
-    <a href={item.link} target="_blank" rel="noreferrer">
+    <a href={item.link} target="_blank" rel="noopener noreferrer">
       <div className="album-item">
         <figure>
           <img src={item.groupImgUrl} alt="" />
