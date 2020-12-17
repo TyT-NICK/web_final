@@ -8,6 +8,19 @@ import { Link, useParams } from 'react-router-dom'
 const MerchItem = (props) => {
   const item = props.item
 
+  const auth = useContext(AuthContext)
+  const { request } = useHttp()
+
+  const path = `/shop/item/${item._id}`
+
+  const deleteItemClickHandle = async (e) => {
+    e.preventDefault()
+    if (window.confirm(`Действительно удалить категорию ${item.name}?`)) {
+      await request(`/api/merchCategory/${item._id}`, 'DELETE')
+      window.location.reload()
+    }
+  }
+
   return (
     // <Link to={item.link}>
     //   <div className="album-item">
@@ -23,6 +36,12 @@ const MerchItem = (props) => {
           <div className="img"><img src={item.groupImgUrl} alt="" /></div>
           <figcaption>{item.name}</figcaption>
         </figure>
+        {
+          auth.isAuthenticated && <div className="admin-panel">
+            <Link to={path} className="button">изменить</Link>
+            <Link className="button" onClick={deleteItemClickHandle}>удалить</Link>
+          </div>
+        }
       </div>
     </a>
   )

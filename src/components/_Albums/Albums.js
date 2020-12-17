@@ -70,7 +70,7 @@ const AlbumItem = (props) => {
       <div className="album-item">
         <figure>
           <div className="img">
-            <img src="https://via.placeholder.com/170x170" alt="123" />
+            <img src="https://via.placeholder.com/100x300" alt="123" />
           </div>
           <figcaption>{album.title}</figcaption>
         </figure>
