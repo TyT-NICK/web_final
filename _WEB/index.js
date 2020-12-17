@@ -9,10 +9,11 @@ const app = express()
 app.use(require('body-parser').json())
 app.use(require('body-parser').urlencoded({ extended: true }))
 app.use((req, res, next) => {
+  console.log(req.url)
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'X-Requested-With')
   next()
-}) // !!!!!!!!!!!!
+})
 app.use('/api/news', require('./routes/news.routes'))
 app.use('/api/admin', require('./routes/admin.routes'))
 app.use('/api/album', require('./routes/album.routes'))

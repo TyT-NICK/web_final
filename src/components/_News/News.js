@@ -14,14 +14,17 @@ export const NewsPage = () => {
   const [ news, setNews ] = useState({})
   const { loading, request } = useHttp()
 
-  useEffect(() => {
-    async function getReq() {
-      const fetched = await request(`http://a0490648.xsph.ru/api/news/${id}`)
+  const path = `/api/news/${id}/`
+
+  useEffect(()=> {
+    const fetching = async () => {
+      const fetched = await request(path, 'GET')
+      console.log(fetched)
       setNews(fetched)
     }
 
-    getReq()
-  }, [ id, request ])
+    fetching()
+  }, [])
 
   return (
     loading ? <Preloader /> :
@@ -68,30 +71,27 @@ const NewsItem = (props) => {
 }
 
 export const AllNews = () => {
-  const [ isReady, setReady ] = useState(false)
   const [ news, setNews ] = useState([])
+  const { loading, request } = useHttp()
 
-  useEffect(() => {
-    fetch('http://a0490648.xsph.ru/api/news')
-      .then((res) => res.json())
-      .then((resNews) => {
-        setReady(true)
-        setNews(resNews)
-      })
-      .catch((e) => console.error(e))
+  const path = '/api/news/'
+
+  useEffect(()=> {
+    const fetching = async () => {
+      const fetched = await request(path, 'GET')
+      setNews(fetched)
+    }
+
+    fetching()
   }, [])
 
-  if (isReady) {
-    console.log(news)
-    return (
+  return (
+    loading ? <Preloader /> :
       <div className="content-container">
         <h1 className="main-title"><span>Новости</span></h1>
         {
           news.map((x, i) => <NewsItem news={x} key={i} />)
         }
       </div>
-    )
-  } else {
-    return (<Preloader />)
-  }
+  )
 }
