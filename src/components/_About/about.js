@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+
+import authContext from '../../context/AuthContext'
 
 import './about.scss'
 
 export const EditAboutGroup = () => {
-  const [ input, setInput ] = useEffect({})
+  const [ input, setInput ] = useState({})
 
   const formSubmitHandler = (e) => {
     e.preventDefault()
@@ -39,6 +42,35 @@ export const EditAboutGroup = () => {
   )
 }
 
+const AboutGroup = () => {
+  const auth = useContext(authContext)
+  const descr =
+    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
+    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
+    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
+    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
+    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
+    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s' +
+    'ascsmlskdmkamsklcm kasmdka msldkasmlk maslkmdlkam skalksdlkasmdkl mlkasmdka s'
+
+  return (
+    <section className="about-group">
+      <h1 className="main-title"><span>О группе</span></h1>
+
+      <figure className="">
+        <div className="img"><img src="https://via.placeholder.com/320x480" alt="" /></div>
+        <figcaption><p>{descr}</p></figcaption>
+      </figure>
+
+      {
+        auth.isAuthenticated ?
+          <Link to="/about/editgroup" className="button">Редактировать</Link> :
+          null
+      }
+      <Link to="/login" className="button">войти</Link>
+    </section>
+  )
+}
 
 const members = [
   {

@@ -3,7 +3,7 @@ import React from 'react'
 
 import AllAlbumsPage, { AlbumPage } from './components/_Albums/Albums'
 import Sandbox from './components/sandbox/sandbox'
-import AboutPage from './components/_About/about'
+import AboutPage, { EditAboutGroup } from './components/_About/about'
 import { AllNews, NewsPage } from './components/_News/News'
 import AuthPage from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
@@ -47,17 +47,24 @@ export const useRoutes = (isAuthenticated) => {
       <Route path="/about" exact>
         <AboutPage />
       </Route>
-      {isAuthenticated ?
-        <Route path="/addAdmin" exact>
-          {null}
-        </Route> :
-        <Redirect to="/events" />
+      {
+        isAuthenticated ?
+          <>
+            <Route path="/addAdmin" exact>
+              {null}
+            </Route>
+            <Route path="/about/editgroup">
+              <EditAboutGroup />
+            </Route>
+          </> :
+          null
       }
-      {!isAuthenticated ?
-        <Route path="/login" exact>
-          <AuthPage />
-        </Route> :
-        <Redirect to="/events" />
+      {
+        !isAuthenticated ?
+          <Route path="/login" exact>
+            <AuthPage />
+          </Route> :
+          null
       }
       <Redirect to="/events" />
     </Switch>
