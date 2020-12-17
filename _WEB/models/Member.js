@@ -4,6 +4,6 @@ const Member = new Schema({
   name: { type: String, required: true, unique: true },
   socialUrl: { type: String, required: true },
   photoUrl: { type: String, required: true },
-  description: { type: Buffer }, // !!!!!!!!!!!!!!!!!!
+  description: { type: String }, // !!!!!!!!!!!!!!!!!!
 })
 module.exports = model('Member', Member)

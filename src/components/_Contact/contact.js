@@ -6,6 +6,9 @@ export const ContactPage = () => {
     <div className="content-container">
       <section className='contacts'>
         <h1 className="main-title"><span>контакты</span></h1>
+        {
+
+        }
         <p>По любым вопросам по поводу концертов писать сюда:</p>
         <h2 className="sub-title">
           <a href="mailto:emoloxi@mail.ru">emoloxi@mail.ru</a>
