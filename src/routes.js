@@ -12,6 +12,7 @@ import { Shop } from './components/_Shop/Shop'
 import { ContactPage } from './components/_Contact/contact'
 
 export const useRoutes = (isAuthenticated) => {
+  console.log(isAuthenticated)
   return (
     <Switch>
       <Route path="/albums" exact>
@@ -48,25 +49,24 @@ export const useRoutes = (isAuthenticated) => {
         <AboutPage />
       </Route>
       {
-        isAuthenticated ?
-          <>
-            <Route path="/addAdmin" exact>
-              {null}
-            </Route>
-            <Route path="/about/editgroup">
-              <EditAboutGroup />
-            </Route>
-          </> :
-          null
+        isAuthenticated &&
+          <Route path="/addAdmin" exact>
+            {null}
+          </Route>
       }
       {
-        !isAuthenticated ?
+        isAuthenticated &&
+          <Route path="/about/editgroup">
+            <EditAboutGroup />
+          </Route>
+
+      }
+      { !isAuthenticated &&
           <Route path="/login" exact>
             <AuthPage />
-          </Route> :
-          null
+          </Route>
       }
-      <Redirect to="/events" />
+      <Redirect to="/news" />
     </Switch>
   )
 }
