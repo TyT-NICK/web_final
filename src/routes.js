@@ -8,7 +8,7 @@ import { AllNews, NewsPage } from './components/_News/News'
 import AuthPage from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
 import EventsPage, { EventPage } from './components/_Events/Events'
-import { Shop } from './components/_Shop/Shop'
+import { Shop, EditMerchCategory } from './components/_Shop/Shop'
 import { ContactPage } from './components/_Contact/contact'
 
 export const useRoutes = (isAuthenticated) => {
@@ -38,6 +38,13 @@ export const useRoutes = (isAuthenticated) => {
       <Route path="/shop" exact>
         <Shop />
       </Route>
+      {
+        isAuthenticated &&
+        <Route path="/shop/item/:id?">
+          <EditMerchCategory />
+        </Route>
+      }
+
       <Route path="/contacts" exact>
         <ContactPage />
       </Route>
