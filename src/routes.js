@@ -9,6 +9,7 @@ import AuthPage from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
 import EventsPage, { EventPage } from './components/_Events/Events'
 import { Shop } from './components/_Shop/Shop'
+import { ContactPage } from './components/_Contact/contact'
 
 export const useRoutes = (isAuthenticated) => {
   return (
@@ -38,7 +39,7 @@ export const useRoutes = (isAuthenticated) => {
         <Shop />
       </Route>
       <Route path="/contacts" exact>
-        {null}
+        <ContactPage />
       </Route>
       <Route path="/sandbox" exact>
         <Sandbox />
