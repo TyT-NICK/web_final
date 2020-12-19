@@ -17,7 +17,6 @@ export const EditAlbum = () => {
   })
 
   const { id } = useParams()
-  console.log(id)
   const { loading, request } = useHttp()
 
   const path = '/api/album'
@@ -29,19 +28,19 @@ export const EditAlbum = () => {
     }
 
     id && fetching()
-  }, [ path, request ])
+  }, [ id, path, request ])
 
   const formSubmitHandler = (e) => {
     e.preventDefault()
+    console.log(input)
 
     id ?
-      request(path, 'PUT', input) :
+      request(`${path}/${id}`, 'PUT', input) :
       request(`${path}/add`, 'POST', input)
   }
 
   const inputChangeHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })
-    console.log(input)
   }
 
   // AUTHORS manipulation
@@ -53,8 +52,12 @@ export const EditAlbum = () => {
   const authorsAddHandler = () => {
     setInput({ ...input, AlbumAuthors: [ ...input.AlbumAuthors, { name: '', socialLink: '' } ] })
   }
-  const authorDeleteHandler = (i) => {
-    setInput({ ...input, AlbumAuthors: input.AlbumAuthors.splice(i, 1) })
+  const authorDeleteHandler = (e, i) => {
+    e.preventDefault()
+
+    const newArray = [ ...input.AlbumAuthors ]
+    newArray.splice(i, 1)
+    setInput({ ...input, AlbumAuthors: newArray })
   }
 
   // SERVICES manipulation
@@ -66,21 +69,29 @@ export const EditAlbum = () => {
   const serviceAddHandler = () => {
     setInput({ ...input, AlbumServices: [ ...input.AlbumServices, { title: '', link: '' } ] })
   }
-  const serviceDeleteHandler = (i) => {
-    setInput({ ...input, AlbumServices: input.AlbumServices.splice(i, 1) })
+  const serviceDeleteHandler = (e, i) => {
+    e.preventDefault()
+
+    const newArray = [ ...input.AlbumServices ]
+    newArray.splice(i, 1)
+    setInput({ ...input, AlbumServices: newArray })
   }
 
   // TRACKS manipulation
   const tracksChangeHandler = (index, e) => {
     setInput({ ...input, Tracks: input.Tracks.map((x, i) => {
-      return i === index ? { ...x, [e.target.name]: e.target.value } : x
+      return i === index ? e.target.value : x
     }) })
   }
   const tracksAddHandler = () => {
     setInput({ ...input, Tracks: [ ...input.Tracks, '' ] })
   }
-  const tracksDeleteHandler = (i) => {
-    setInput({ ...input, Tracks: input.Tracks.splice(i, 1) })
+  const tracksDeleteHandler = (e, i) => {
+    e.preventDefault()
+
+    const newArray = [ ...input.Tracks ]
+    newArray.splice(i, 1)
+    setInput({ ...input, Tracks: newArray })
   }
 
   return (
@@ -128,6 +139,7 @@ export const EditAlbum = () => {
                       type="text"
                       name="name"
                       id="name"
+                      placeholder="Имя автора"
                       value={x.name}
                       onChange={(e) => authorsChangeHandler(i, e)}
                     />
@@ -135,16 +147,81 @@ export const EditAlbum = () => {
                       type="text"
                       name="socialLink"
                       id="socialLink"
+                      placeholder="Ссылка на соцсети"
                       value={x.socialLink}
                       onChange={(e) => authorsChangeHandler(i, e)}
                     />
                     {
                       input.AlbumAuthors.length !== 1 &&
-                      <button onClick={() => authorDeleteHandler(i)}>Удалить</button>
+                      <button onClick={(e) => authorDeleteHandler(e, i)}>Удалить</button>
                     }
                     {
                       input.AlbumAuthors.length - 1 === i &&
                       <button onClick={() => authorsAddHandler()}>Добавить</button>
+                    }
+                  </div>
+                )
+              })
+            }
+          </div>
+
+          <div className="form-item">
+            <label>Где послушать</label>
+            {
+              input.AlbumServices.map((x, i) => {
+                return (
+                  <div key={i} className="flex-pair">
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      placeholder="Название сервиса"
+                      value={x.title}
+                      onChange={(e) => servicesChangeHandler(i, e)}
+                    />
+                    <input
+                      type="text"
+                      name="link"
+                      id="link"
+                      placeholder="Ссылка на альбом"
+                      value={x.link}
+                      onChange={(e) => servicesChangeHandler(i, e)}
+                    />
+                    {
+                      input.AlbumServices.length !== 1 &&
+                      <button onClick={(e) => serviceDeleteHandler(e, i)}>Удалить</button>
+                    }
+                    {
+                      input.AlbumServices.length - 1 === i &&
+                      <button onClick={() => serviceAddHandler()}>Добавить</button>
+                    }
+                  </div>
+                )
+              })
+            }
+          </div>
+
+          <div className="form-item">
+            <label>Список треков</label>
+            {
+              input.Tracks.map((x, i) => {
+                return (
+                  <div key={i}>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      placeholder="Название трека"
+                      value={x}
+                      onChange={(e) => tracksChangeHandler(i, e)}
+                    />
+                    {
+                      input.Tracks.length !== 1 &&
+                      <button onClick={(e) => tracksDeleteHandler(e, i)}>Удалить</button>
+                    }
+                    {
+                      input.Tracks.length - 1 === i &&
+                      <button onClick={() => tracksAddHandler()}>Добавить</button>
                     }
                   </div>
                 )
@@ -200,14 +277,22 @@ export const AlbumPage = () => {
             <ul>
               {
                 !album.AlbumServices ? null :
-                  album.AlbumServices.map((x, i) => <li key={i}>{x}</li>)
+                  album.AlbumServices.map((x, i) => {
+                    return <li key={i}>
+                      <a href={x.link}>{x.title}</a>
+                    </li>
+                  })
               }
             </ul>
             <h2 className="sub-title"><span>Авторы</span></h2>
             <ul>
               {
                 !album.AlbumAuthors ? null :
-                  album.AlbumAuthors.map((x, i) => <li key={i}>{x}</li>)
+                  album.AlbumAuthors.map((x, i) => {
+                    return <li key={i}>
+                      <a href={x.socialLink}>{x.name}</a>
+                    </li>
+                  })
               }
             </ul>
           </div>
@@ -218,25 +303,40 @@ export const AlbumPage = () => {
 
 const AlbumItem = (props) => {
   const album = props.album
-  const path = `/albums/${album._id}`
+  const editPath = `/albums/edit/${album._id}`
+  const path = `/albums/album/${album._id}`
+
+  const auth = useContext(AuthContext)
+  const { request } = useHttp()
+
+  const deleteItemClickHandle = async (e) => {
+    e.preventDefault()
+    if (window.confirm(`Действительно удалить альбом ${album.title}?`)) {
+      await request(`/api/album/${album._id}`, 'DELETE')
+      window.location.reload()
+    }
+  }
+
 
   return (
     <Link to={path}>
       <div className="album-item">
         <figure>
           <div className="img">
-            <img src="https://via.placeholder.com/100x300" alt="123" />
+            <img src={album.imgUrl} alt="123" />
           </div>
           <figcaption>{album.title}</figcaption>
         </figure>
+        {
+          auth.isAuthenticated &&
+          <div className="admin-panel">
+            <Link to={editPath} className="button">изменить</Link>
+            <Link className="button" onClick={deleteItemClickHandle}>удалить</Link>
+          </div>
+        }
       </div>
     </Link>
   )
-}
-
-const album = {
-  id: 1,
-  title: '12asdasdasd asdasda asd a3',
 }
 
 const AllAlbumsPage = (props) => {
@@ -266,17 +366,12 @@ const AllAlbumsPage = (props) => {
           <div className="albums-container">
             {
               albums.map((x, i) => <AlbumItem key={i} album={x} />)
-
             }
-            <AlbumItem album={album} />
-            <AlbumItem album={album} />
-            <AlbumItem album={album} />
-            <AlbumItem album={album} />
           </div>
           {
             auth.isAuthenticated &&
             <div className="admin-panel">
-              <Link className="button" to="/albums/edit">добавить</Link>
+              <Link className="button" to="/albums/edit/">добавить</Link>
             </div>
           }
         </section>

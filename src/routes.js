@@ -25,7 +25,7 @@ export const useRoutes = (isAuthenticated) => {
           <EditAlbum />
         </Route>
       }
-      <Route path="/albums/:id" exact>
+      <Route path="/albums/album/:id" exact>
         <AlbumPage />
       </Route>
 
