@@ -73,7 +73,7 @@ const EventMonth = (props) => {
 }
 
 const EventsPage = () => {
-  const { request } = useHttp()
+  const { loading, request } = useHttp()
 
   const [ events, setEvents ] = useState([])
 
@@ -109,13 +109,14 @@ const EventsPage = () => {
   }, [ request ])
 
   return (
-    <div className="content-container">
-      {
-        Object.entries(events).map((month, i) => {
-          return <EventMonth key={i} monthName={month[0]} events={month[1]} />
-        })
-      }
-    </div>
+    loading ? <Preloader /> :
+      <div className="content-container">
+        {
+          Object.entries(events).map((month, i) => {
+            return <EventMonth key={i} monthName={month[0]} events={month[1]} />
+          })
+        }
+      </div>
   )
 }
 
