@@ -86,23 +86,13 @@ export const useRoutes = (isAuthenticated) => {
         isAuthenticated &&
         <Route path="/addAdmin" exact>
           {null}
-<<<<<<< HEAD
         </Route>
-=======
-        </Route> :
-        <Redirect to="/news" />
->>>>>>> origin/fix/fixed_logo
       }
 
       { !isAuthenticated &&
         <Route path="/login" exact>
           <AuthPage />
-<<<<<<< HEAD
         </Route>
-=======
-        </Route> :
-        <Redirect to="/news" />
->>>>>>> origin/fix/fixed_logo
       }
       <Redirect to="/news" />
     </Switch>
