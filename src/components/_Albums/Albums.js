@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+
 import AuthContext from '../../context/AuthContext'
-import './Albums.scss'
 import { useHttp } from '../../hooks/http.hook'
 import { Preloader } from '../preloader/preloader'
 
+import './Albums.scss'
 
 export const EditAlbum = () => {
   const [ input, setInput ] = useState({

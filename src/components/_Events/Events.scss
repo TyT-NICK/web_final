@@ -40,10 +40,15 @@
       word-wrap: break-word;
     }
   }
-}
 
-@media screen and (max-width: 720px) {
-  .events-container {
-    grid-template-columns: 1fr 1fr;
+  @media screen and (max-width: 840px) {
+    & {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    & {
+      grid-template-columns: 1fr;
+    }
   }
 }

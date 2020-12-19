@@ -7,7 +7,7 @@ import AboutPage, { EditAboutGroup, EditMember } from './components/_About/about
 import { AllNews, NewsPage } from './components/_News/News'
 import AuthPage from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
-import EventsPage, { EventPage } from './components/_Events/Events'
+import EventsPage, { EditEvent, EventPage } from './components/_Events/Events'
 import { Shop, EditMerchCategory } from './components/_Shop/Shop'
 import { ContactPage } from './components/_Contact/contact'
 
@@ -29,11 +29,17 @@ export const useRoutes = (isAuthenticated) => {
         <AlbumPage />
       </Route>
 
-      {/* NEWS routes */}
+      {/* EVENTS routes */}
       <Route path="/events" exact>
         <EventsPage />
       </Route>
-      <Route path="/events/:id" exact>
+      {
+        // isAuthenticated &&
+        <Route path="/events/edit/:id?">
+          <EditEvent />
+        </Route>
+      }
+      <Route path="/events/event/:id" exact>
         <EventPage />
       </Route>
 

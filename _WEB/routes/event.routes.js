@@ -23,14 +23,15 @@ router.get('/', async (req, res) => {
 router.post('/add', async (req, res) => {
   try {
     const { name, date, previewUrl, content, place, link } = req.body
-    const event = new Place({
-      name, date, previewUrl, content, place, link,
+    const event = new Event({
+      ...req.body
     })
 
     await event.save()
 
     res.status(201).json({ place })
   } catch (e) {
+    console.log(e.message)
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 })
