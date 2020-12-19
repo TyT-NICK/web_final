@@ -97,13 +97,13 @@ export const useRoutes = (isAuthenticated) => {
         </Route>
       }
       {
-        // isAuthenticated &&
+        isAuthenticated &&
         <Route path="/admins" exact>
           <AdminsPage />
         </Route>
       }
       {
-        // isAuthenticated &&
+        isAuthenticated &&
         <Route path="/admins/edit/:id" exact>
           <EditAdminPage />
         </Route>
