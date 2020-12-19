@@ -5,6 +5,161 @@ import './Albums.scss'
 import { useHttp } from '../../hooks/http.hook'
 import { Preloader } from '../preloader/preloader'
 
+
+export const EditAlbum = () => {
+  const [ input, setInput ] = useState({
+    title: '',
+    caption: '',
+    imgUrl: '',
+    AlbumAuthors: [ { name: '', socialLink: '' } ],
+    AlbumServices: [ { title: '', link: '' } ],
+    Tracks: [ '' ],
+  })
+
+  const { id } = useParams()
+  console.log(id)
+  const { loading, request } = useHttp()
+
+  const path = '/api/album'
+
+  useEffect(() => {
+    const fetching = async () => {
+      const fetched = await request(`${path}/${id}`, 'GET')
+      setInput(fetched)
+    }
+
+    id && fetching()
+  }, [ path, request ])
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault()
+
+    id ?
+      request(path, 'PUT', input) :
+      request(`${path}/add`, 'POST', input)
+  }
+
+  const inputChangeHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value })
+    console.log(input)
+  }
+
+  // AUTHORS manipulation
+  const authorsChangeHandler = (index, e) => {
+    setInput({ ...input, AlbumAuthors: input.AlbumAuthors.map((x, i) => {
+      return i === index ? { ...x, [e.target.name]: e.target.value } : x
+    }) })
+  }
+  const authorsAddHandler = () => {
+    setInput({ ...input, AlbumAuthors: [ ...input.AlbumAuthors, { name: '', socialLink: '' } ] })
+  }
+  const authorDeleteHandler = (i) => {
+    setInput({ ...input, AlbumAuthors: input.AlbumAuthors.splice(i, 1) })
+  }
+
+  // SERVICES manipulation
+  const servicesChangeHandler = (index, e) => {
+    setInput({ ...input, AlbumServices: input.AlbumServices.map((x, i) => {
+      return i === index ? { ...x, [e.target.name]: e.target.value } : x
+    }) })
+  }
+  const serviceAddHandler = () => {
+    setInput({ ...input, AlbumServices: [ ...input.AlbumServices, { title: '', link: '' } ] })
+  }
+  const serviceDeleteHandler = (i) => {
+    setInput({ ...input, AlbumServices: input.AlbumServices.splice(i, 1) })
+  }
+
+  // TRACKS manipulation
+  const tracksChangeHandler = (index, e) => {
+    setInput({ ...input, Tracks: input.Tracks.map((x, i) => {
+      return i === index ? { ...x, [e.target.name]: e.target.value } : x
+    }) })
+  }
+  const tracksAddHandler = () => {
+    setInput({ ...input, Tracks: [ ...input.Tracks, '' ] })
+  }
+  const tracksDeleteHandler = (i) => {
+    setInput({ ...input, Tracks: input.Tracks.splice(i, 1) })
+  }
+
+  return (
+    loading ? <Preloader /> :
+      <div className="content-container">
+        <form action="" className="edit-form" onSubmit={formSubmitHandler}>
+          <div className="form-item">
+            <label htmlFor="title">Название альбома</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              value={input.title}
+              onChange={inputChangeHandler}
+            />
+          </div>
+
+          <div className="form-item">
+            <label htmlFor="caption">Описание альбома</label>
+            <textarea
+              name="caption"
+              id="caption"
+              value={input.caption}
+              onChange={inputChangeHandler} />
+          </div>
+
+          <div className="form-item">
+            <label htmlFor="imgUrl">Ссылка на обложку</label>
+            <input
+              type="text"
+              name="imgUrl"
+              id="imgUrl"
+              value={input.imgUrl}
+              onChange={inputChangeHandler}
+            />
+          </div>
+
+          <div className="form-item">
+            <label>Авторы альбома</label>
+            {
+              input.AlbumAuthors.map((x, i) => {
+                return (
+                  <div key={i} className="flex-pair">
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      value={x.name}
+                      onChange={(e) => authorsChangeHandler(i, e)}
+                    />
+                    <input
+                      type="text"
+                      name="socialLink"
+                      id="socialLink"
+                      value={x.socialLink}
+                      onChange={(e) => authorsChangeHandler(i, e)}
+                    />
+                    {
+                      input.AlbumAuthors.length !== 1 &&
+                      <button onClick={() => authorDeleteHandler(i)}>Удалить</button>
+                    }
+                    {
+                      input.AlbumAuthors.length - 1 === i &&
+                      <button onClick={() => authorsAddHandler()}>Добавить</button>
+                    }
+                  </div>
+                )
+              })
+            }
+          </div>
+
+          <div className="form-item">
+            <input type="submit" />
+          </div>
+        </form>
+      </div>
+  )
+}
+
 export const AlbumPage = () => {
   const { request, loading } = useHttp()
   const { id } = useParams()
@@ -118,6 +273,12 @@ const AllAlbumsPage = (props) => {
             <AlbumItem album={album} />
             <AlbumItem album={album} />
           </div>
+          {
+            auth.isAuthenticated &&
+            <div className="admin-panel">
+              <Link className="button" to="/albums/edit">добавить</Link>
+            </div>
+          }
         </section>
       </div>
   )

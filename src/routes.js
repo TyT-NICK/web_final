@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 
-import AllAlbumsPage, { AlbumPage } from './components/_Albums/Albums'
+import AllAlbumsPage, { AlbumPage, EditAlbum } from './components/_Albums/Albums'
 import Sandbox from './components/sandbox/sandbox'
 import AboutPage, { EditAboutGroup, EditMember } from './components/_About/about'
 import { AllNews, NewsPage } from './components/_News/News'
@@ -19,11 +19,14 @@ export const useRoutes = (isAuthenticated) => {
       <Route path="/albums" exact>
         <AllAlbumsPage />
       </Route>
+      {
+        isAuthenticated &&
+        <Route path="/albums/edit/:id?">
+          <EditAlbum />
+        </Route>
+      }
       <Route path="/albums/:id" exact>
         <AlbumPage />
-      </Route>
-      <Route path="/albums/add" exact>
-        <p>adding</p>
       </Route>
 
       {/* NEWS routes */}
