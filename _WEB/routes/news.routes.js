@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
   try {
     const { title, previewUrl, content, date } = req.body
     const news = new News({
