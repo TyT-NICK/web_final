@@ -34,7 +34,7 @@ export const useRoutes = (isAuthenticated) => {
         <EventsPage />
       </Route>
       {
-        // isAuthenticated &&
+        isAuthenticated &&
         <Route path="/events/edit/:id?">
           <EditEvent />
         </Route>
