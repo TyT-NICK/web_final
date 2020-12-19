@@ -31,6 +31,8 @@ router.post('/add', async (req, res) => {
 
     res.status(201).json({ admin })
   } catch (e) {
+    console.log(e.message)
+    console.log(req.body)
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 })

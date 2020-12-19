@@ -4,7 +4,7 @@ import AllAlbumsPage, { AlbumPage, EditAlbum } from './components/_Albums/Albums
 import Sandbox from './components/sandbox/sandbox'
 import AboutPage, { EditAboutGroup, EditMember } from './components/_About/about'
 import { AllNews, NewsPage, EditNews } from './components/_News/News'
-import AuthPage from './components/_Auth/auth'
+import AuthPage, { AdminsPage, EditAdminPage } from './components/_Auth/auth'
 import { Redirect, Route, Switch } from 'react-router'
 import EventsPage, { EditEvent, EventPage } from './components/_Events/Events'
 import { Shop, EditMerchCategory } from './components/_Shop/Shop'
@@ -47,7 +47,7 @@ export const useRoutes = (isAuthenticated) => {
         <AllNews />
       </Route>
       {
-        // isAuthenticated &&
+        isAuthenticated &&
         <Route path="/news/edit/:id?">
           <EditNews />
         </Route>
@@ -97,9 +97,15 @@ export const useRoutes = (isAuthenticated) => {
         </Route>
       }
       {
-        isAuthenticated &&
-        <Route path="/addAdmin" exact>
-          {null}
+        // isAuthenticated &&
+        <Route path="/admins" exact>
+          <AdminsPage />
+        </Route>
+      }
+      {
+        // isAuthenticated &&
+        <Route path="/admins/edit/:id" exact>
+          <EditAdminPage />
         </Route>
       }
 
