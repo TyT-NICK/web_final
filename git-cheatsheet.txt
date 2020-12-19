@@ -1,2 +1,2 @@
 // delete merged local branches
-git branch | Select-String -NotMatch -Pattern "master" | %{ git branch -D $_.ToString().Trim() }
+git branch | Select-String -NotMatch -Pattern "main" | %{ git branch -D $_.ToString().Trim() }
