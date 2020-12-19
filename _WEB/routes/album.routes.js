@@ -24,13 +24,14 @@ router.post('/add', async (req, res) => {
   try {
     const { title, imgUrl, AlbumAuthors, AlbumServices, Tracks } = req.body
     const album = new Album({
-      title, imgUrl, AlbumAuthors, AlbumServices, Tracks,
+      ...req.body
     })
 
     await album.save()
 
     res.status(201).json({ album })
   } catch (e) {
+    console.log(e.message)
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 })
