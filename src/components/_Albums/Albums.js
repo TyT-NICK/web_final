@@ -105,6 +105,7 @@ export const EditAlbum = () => {
               type="text"
               name="title"
               id="title"
+              placeholder="Название"
               value={input.title}
               onChange={inputChangeHandler}
             />
@@ -115,6 +116,7 @@ export const EditAlbum = () => {
             <textarea
               name="caption"
               id="caption"
+              placeholder="Описание"
               value={input.caption}
               onChange={inputChangeHandler} />
           </div>
@@ -125,6 +127,7 @@ export const EditAlbum = () => {
               type="text"
               name="imgUrl"
               id="imgUrl"
+              placeholder="Ссылка"
               value={input.imgUrl}
               onChange={inputChangeHandler}
             />

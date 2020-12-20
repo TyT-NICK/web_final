@@ -82,6 +82,7 @@ export const EditMerchCategory = () => {
               type="text"
               name="name"
               id="name"
+              placeholder="Название"
               value={input.name}
               onChange={inputChangeHandler}
             />
@@ -92,6 +93,7 @@ export const EditMerchCategory = () => {
               type="text"
               name="link"
               id="link"
+              placeholder="Ссылка"
               value={input.link}
               onChange={inputChangeHandler}
             />
@@ -102,6 +104,7 @@ export const EditMerchCategory = () => {
               type="text"
               name="groupImgUrl"
               id="groupImgUrl"
+              placeholder="Ссылка"
               value={input.groupImgUrl}
               onChange={inputChangeHandler}
             />
