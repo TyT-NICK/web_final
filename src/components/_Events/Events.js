@@ -63,6 +63,7 @@ export const EditEvent = () => {
               type="text"
               name="name"
               id="name"
+              placeholder="Название события"
               value={input.name}
               onChange={inputChangeHandler}
             />
@@ -83,6 +84,7 @@ export const EditEvent = () => {
               type="text"
               name="previewUrl"
               id="previewUrl"
+              placeholder="Ссылка на превью"
               value={input.previewUrl}
               onChange={inputChangeHandler}
             />
@@ -94,6 +96,7 @@ export const EditEvent = () => {
               type="text"
               name="content"
               id="content"
+              placeholder="Описание события"
               value={input.content}
               onChange={inputChangeHandler}
             />
@@ -105,6 +108,7 @@ export const EditEvent = () => {
               type="text"
               name="place"
               id="place"
+              placeholder="Город"
               value={input.place}
               onChange={inputChangeHandler}
             />
@@ -116,6 +120,7 @@ export const EditEvent = () => {
               type="text"
               name="link"
               id="link"
+              placeholder="Ссылка на мероприятие"
               value={input.link}
               onChange={inputChangeHandler}
             />

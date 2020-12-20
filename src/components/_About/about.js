@@ -48,6 +48,7 @@ export const EditAboutGroup = () => {
             <textarea
               name="description"
               id="description"
+              placeholder="Описание"
               value={input.description}
               onChange={inputChangeHandler}
             />
@@ -58,6 +59,7 @@ export const EditAboutGroup = () => {
             <input type="text"
               name="imgUrl"
               id="imgUrl"
+              placeholder="Ссылка"
               value={input.imgUrl}
               onChange={inputChangeHandler} />
           </div>
@@ -110,6 +112,7 @@ export const EditMember = () => {
               type="text"
               name="name"
               id="name"
+              placeholder="Имя"
               value={input.name}
               onChange={inputChangeHandler}
             />
@@ -120,6 +123,7 @@ export const EditMember = () => {
               type="text"
               name="socialUrl"
               id="socialUrl"
+              placeholder="Ссылка"
               value={input.socialUrl}
               onChange={inputChangeHandler}
             />
@@ -130,6 +134,7 @@ export const EditMember = () => {
               type="text"
               name="photoUrl"
               id="photoUrl"
+              placeholder="Ссылка"
               value={input.photoUrl}
               onChange={inputChangeHandler}
             />
@@ -139,6 +144,7 @@ export const EditMember = () => {
             <textarea
               name="description"
               id="description"
+              placeholder="Описание"
               value={input.description}
               onChange={inputChangeHandler}
             />

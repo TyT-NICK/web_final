@@ -55,6 +55,7 @@ export const EditNews = () => {
               type="text"
               name="title"
               id="title"
+              placeholder="Заголовок"
               value={input.title}
               onChange={inputChangeHandler}
             />
@@ -66,6 +67,7 @@ export const EditNews = () => {
               type="text"
               name="previewUrl"
               id="previewUrl"
+              placeholder="Ссылка"
               value={input.previewUrl}
               onChange={inputChangeHandler}
             />
@@ -78,6 +80,7 @@ export const EditNews = () => {
               type="text"
               name="content"
               id="content"
+              placeholder="Текст новости"
               value={input.content}
               onChange={inputChangeHandler}
             />
