@@ -3,6 +3,19 @@ a {
   color: #ffffff;
 }
 
+.bm-burger-button {
+  width: 100px;
+}
+
+.bm-menu {
+  background: #373a4700;
+  font-size: 1.15em;
+}
+
+.bm-overlay {
+  background: rgba(255, 0, 0, 0) !important;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -14,6 +27,18 @@ img.header-logo {
   height: 120px;
   margin: 40px auto;
   display: block;
+}
+
+div.desctop {
+  @media (max-width: 599px) {
+    display: none;
+  }
+}
+
+div.mobile {
+  @media (min-width: 599px) {
+    display: none;
+  }
 }
 
 nav.header-nav {

@@ -19,7 +19,7 @@ function App() {
     }}>
       <Router>
         <Header />
-        <main>
+        <main id="page-wrap">
           {routes}
         </main>
         <Footer />
